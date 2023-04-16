@@ -22,6 +22,9 @@ import {
 } from '@nestjs/swagger';
 import { UserEntity } from './entities/user.entity';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { Roles } from 'src/auth/roles.decorators';
+import { RolesGuard } from 'src/auth/roles.guards';
+import { ERoles } from 'src/auth/roles.enum';
 
 @Controller('users')
 @ApiTags('users')
@@ -35,7 +38,8 @@ export class UsersController {
   }
 
   @Get()
-  @UseGuards(JwtAuthGuard)
+  @Roles(ERoles.ADMIN)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @ApiBearerAuth()
   @ApiOkResponse({ type: UserEntity, isArray: true })
   async findAll() {

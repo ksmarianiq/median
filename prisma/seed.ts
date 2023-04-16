@@ -1,7 +1,6 @@
-// prisma/seed.ts
-
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Role } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
+//import { Roles } from 'src/auth/roles.decorators';
 // initialize Prisma Client
 const prisma = new PrismaClient();
 
@@ -21,6 +20,7 @@ async function main() {
       email: 'sabin@adams.com',
       name: 'Sabin Adams',
       password: passwordSabin,
+      role: Role.ADMIN,
     },
   });
 
@@ -33,6 +33,7 @@ async function main() {
       email: 'alex@ruheni.com',
       name: 'Alex Ruheni',
       password: passwordAlex,
+      role: Role.USER,
     },
   });
 
